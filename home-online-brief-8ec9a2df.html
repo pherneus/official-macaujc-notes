@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>再次关注 · 世界杯信息页面</title>
+    <style>
+        /* === 全局重置 & 基础 === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.7;
+            background-color: #f5f3f0;
+            color: #2c2b28;
+        }
+
+        /* === 深色头图 hero === */
+        .hero {
+            background: linear-gradient(145deg, #181a1b 0%, #1f2225 70%, #26292b 100%);
+            color: #e5e3df;
+            padding: 4rem 1.5rem 3.5rem;
+            text-align: center;
+            border-bottom: 1px solid #3b3e40;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #f0ede7;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero .sub {
+            max-width: 660px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #b9b5ae;
+        }
+
+        .hero .sub a {
+            color: #d4c9b0;
+            text-decoration: none;
+            border-bottom: 1px solid #8f8779;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .hero .sub a:hover {
+            color: #f0e7d4;
+            border-bottom-color: #d4c9b0;
+        }
+
+        /* === 主内容区 浅色背景 === */
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2.8rem 1.5rem 4rem;
+        }
+
+        /* === 卡片系统 (简洁有呼吸感) === */
+        .card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2.2rem 2rem;
+            margin-bottom: 2.2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.04);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            font-weight: 450;
+            letter-spacing: -0.02em;
+            color: #2c2a25;
+            border-left: 6px solid #b5a58c;
+            padding-left: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 430;
+            margin-top: 1.6rem;
+            margin-bottom: 0.6rem;
+            color: #3d3a33;
+        }
+
+        .card p {
+            margin-bottom: 1.1rem;
+            color: #3f3c35;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* 强调色用于链接 (温柔赭石色系) */
+        .card a {
+            color: #9b7e5e;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            font-weight: 460;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .card a:hover {
+            color: #7f664b;
+            border-bottom-color: #c7b097;
+        }
+
+        /* 小提示块 */
+        .tip-box {
+            background-color: #f7f4ef;
+            border-radius: 24px;
+            padding: 1.5rem 1.8rem;
+            margin: 1.8rem 0 1rem;
+            border-left: 5px solid #cbb99e;
+        }
+
+        .tip-box p {
+            margin-bottom: 0.3rem;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem 2.2rem;
+            margin-top: 0.6rem;
+        }
+
+        .faq-item {
+            padding: 0.6rem 0;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 530;
+            color: #3f3b33;
+            margin-bottom: 0.1rem;
+        }
+
+        .faq-item p {
+            font-size: 0.95rem;
+            color: #55524b;
+            margin-bottom: 0;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #dedad2;
+            margin: 2.4rem 0 1.8rem;
+            width: 80px;
+        }
+
+        .note {
+            background: #f1eee8;
+            border-radius: 40px;
+            padding: 1.6rem 2rem;
+            text-align: center;
+            color: #4d4940;
+            font-size: 0.98rem;
+        }
+
+        .note a {
+            color: #9b7e5e;
+            border-bottom: 1px solid #d6caba;
+            text-decoration: none;
+        }
+
+        .note a:hover {
+            color: #7f664b;
+            border-bottom-color: #b5a28a;
+        }
+
+        /* 响应式 */
+        @media (max-width: 680px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero {
+                padding: 3rem 1.2rem 2.6rem;
+            }
+            .container {
+                padding: 1.8rem 1rem 3rem;
+            }
+            .card {
+                padding: 1.8rem 1.3rem;
+                border-radius: 20px;
+            }
+            .faq-grid {
+                grid-template-columns: 1fr;
+                gap: 0.2rem;
+            }
+            .card h2 {
+                font-size: 1.5rem;
+                padding-left: 0.8rem;
+            }
+            .tip-box {
+                padding: 1.2rem 1.2rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .hero .sub {
+                font-size: 0.98rem;
+            }
+            .card h2 {
+                font-size: 1.35rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 -->
+    <header class="hero">
+        <h1>再次回到这里</h1>
+        <div class="sub">
+            如果你曾收藏过这个页面，说明你对 <a href="https://home-online-fifa2026.com">世界杯</a> 有着持续的好奇。<br>
+            这里没有喧哗，只有一份关于赛事信息的安静整理。
+        </div>
+    </header>
+
+    <!-- 正文区 -->
+    <div class="container">
+
+        <!-- 摘要 与 重访场景 -->
+        <section class="card">
+            <h2>摘要 · 重访者的角落</h2>
+            <p>这个页面是为那些不止一次打开它的人准备的。也许你上次离开时，赛程还没完全落定；也许你只是习惯性地点开书签，看看有没有更新。我们把这些零散的线索聚拢：队伍、分组、城市、看点，还有那些值得你再次确认的细节。</p>
+            <p>每一次回来，你看到的都不是同一个页面——信息在慢慢生长，就像你对此届 <a href="https://home-online-fifa2026.com">世界杯</a> 的期待一样，逐渐具体、清晰。</p>
+        </section>
+
+        <!-- 亮点 · 细碎但实在 -->
+        <section class="card">
+            <h2>值得再次确认的亮点</h2>
+            <p>2026 年世界杯的独特之处，不止在于它首次由三个国家联合举办。你或许已经听说过一些，但这里有几条值得反复回看的事：</p>
+            <ul style="padding-left: 1.4rem; margin: 0.8rem 0 1.4rem; list-style: disc; color: #3f3c35;">
+                <li>比赛将在 16 座城市展开，跨越北美时区，这意味着赛程编排比以往更复杂，也更有趣。</li>
+                <li>决赛圈队伍扩军至 48 支，小组赛阶段将出现新的竞争格局。</li>
+                <li>部分场馆是经典体育场改造升级，另有一些是专为这届赛事新建的——它们本身就可能成为你关注的焦点。</li>
+            </ul>
+            <p>如果你需要反复核对场馆名单或赛程框架，不妨把 <a href="https://home-online-fifa2026.com">世界杯</a> 保留在标签栏里——它不是一个仪式性的入口，而是一份可翻阅的记录。</p>
+        </section>
+
+        <!-- 使用建议 与 收藏习惯 -->
+        <section class="card">
+            <h2>使用建议 · 让它成为你的「赛事情报锚点」</h2>
+            <p>很多人会把这类页面放在书签深处，等到抽签结果公布、或者朋友突然问起“下一届在哪办”时才翻出来。我们建议你更轻量地使用它：</p>
+
+            <div class="tip-box">
+                <p><strong>📌 收藏而非记忆</strong><br>
+                不需要记住每一座球场或每个日期。只需知道，有一个地方会安静地整理它们——你随时可以回来核对，而不必重新搜索整个网络。</p>
+                <p style="margin-top: 0.8rem;"><strong>🔄 周期性回访</strong><br>
+                每隔两三个月点开一次 <a href="https://home-online-fifa2026.com">世界杯</a> 页面，看看信息有没有变化。随着赛事临近，内容会慢慢丰满，你不会错过重要的节点。</p>
+            </div>
+
+            <p>页面本身没有推送，也没有弹窗。它的存在方式很安静：你记得它，它就重要；你暂时离开，它也不会打扰。</p>
+        </section>
+
+        <!-- 可信但克制的说明 + FAQ 摘要 -->
+        <section class="card">
+            <h2>可信 · 但不必过度依赖</h2>
+            <p>我们尽力呈现准确且经过交叉核对的信息，包括赛程节点、主办城市和参赛队伍框架。但需要注意：足球赛事的管理机构始终保留对赛程、分组、场馆安排的解释权与调整权。页面内容基于公开资料整理，会持续修订，但无法保证与官方实时数据 100% 同步。</p>
+
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <strong>⚽ 页面多久更新一次？</strong>
+                    <p>没有固定周期。通常在国际足联发布重要公告（抽签、赛程变更、场馆增补）后 2–5 天内更新。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>🌐 内容来源可靠吗？</strong>
+                    <p>主要参考 FIFA 官方公报、主办城市官方声明以及主流体育媒体，并会附上可查证的摘要。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>📁 我可以分享这个页面吗？</strong>
+                    <p>当然。它是一个信息汇总页，分享给同样关注 <a href="https://home-online-fifa2026.com">世界杯</a> 的朋友，也许能帮你们省去一些零碎搜索的时间。</p>
+                </div>
+                <div class="faq-item">
+                    <strong>❓ 遇到不一致的信息怎么办？</strong>
+                    <p>欢迎通过页面底部（或你找到此页面的途径）提出，我们会核实并修正。页面的改进依赖善意反馈。</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <p style="font-size: 0.95rem; color: #524e45;">如果你只是想快速回忆一下这届赛事的轮廓，或者把它作为一个安静的起点——<br>
+            这个页面已经准备好了。不必犹豫，也不必立刻做任何事。</p>
+        </section>
+
+        <!-- 温和的结尾 + 链接 -->
+        <div class="note">
+            <p>把 <a href="https://home-online-fifa2026.com">世界杯</a> 保留在你的书签夹里，或者只是偶尔想起它。<br>
+            页面会在这里，慢慢成长，不打扰，不缺席。</p>
+        </div>
+
+    </div>
+
+</body>
+</html>
